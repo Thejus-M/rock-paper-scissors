@@ -8,10 +8,59 @@ import pyfiglet
 import random
 import emoji
 
+scissor = '''
+    
+@@@@@7 @@@@@@@@@@@G @@@@@
+@@@@@@  @@@@@@@@@Y @@@@@@
+@@@@@@@  &@@@@@@  @@@@@@@
+@@@@@@@@&  @@@#  @@@@@@@@
+@@@@@@@@@@  @   @@@@@@@@@
+@@@@@@@@@@@   @@@@@@@@@@@
+@@@@@@@@@@     @@@@@@@@@@
+@@@@       @@        @@@@
+@@   @@@@  @@   @@@@   @@
+@@  @@@@@@@   @@@@@@@  @@
+@@   @@@@@     @@@@@   @@
+@@@        @@         @@@
+@@@#?J55Y?Y@@@Y?Y55J?#@@@   
+      
+   
+'''
+paper = '''
 
+    .!:^^^^^^^^^:~?.     
+    ~:           .Y~?~   
+    ~:               Y   
+    ~:               ?   
+    ~:               ?   
+    ~:               ?   
+    ~:               ?   
+    ~:               J   
+    ~:               J   
+    ~.               ?   
+    !:               J   
+    .~::::::::^^^^^^^~  
+'''
+rock = '''
+
+
+
+
+
+
+
+        .7JJJ.      
+       .PBBG5~      
+      :P#&&#P?.     
+     .G###&&&G:     
+      Y&&&#B5^      
+       !?~.         
+                    
+'''
 console = Console()
 list1 = [1, 2, 3]
 choices = ["Error", "Rock", "Paper", "Scissor"]
+shape = ["Error",rock,paper,scissor]
 my_data = []
 
 won = ["You won this round"]
@@ -46,12 +95,12 @@ def display_win(p):
     if p == 0:
         table = Table(show_header=True, header_style="bold magenta")
         table.add_column("Attempt No.", justify="center", width=7)
-        table.add_column("Bot choice", width=14)
-        table.add_column("User choice", justify="right", width=14)
+        table.add_column("Bot choice", justify="center", width=25)
+        table.add_column("User choice", justify="center", width=25)
         table.add_column("Score", justify="center")
         table.add_row(f"[bold yellow]{attempt}[/bold yellow]",
-                      f"[bold yellow]{choices[computer_choice]}[/bold yellow]",
-                      f"[bold yellow]{choices[user_choice]}[/bold yellow]",
+                      f"[bold yellow]{choices[computer_choice]}{shape[computer_choice]}[/bold yellow]",
+                      f"[bold yellow]{choices[user_choice]}{shape[user_choice]}[/bold yellow]",
                       f"[bold yellow]{str(computer_score)}-{str(user_score)}[/bold yellow]")
         console.print(table)
         console.print(tabulate(my_data, headers=tie,
@@ -63,12 +112,12 @@ def display_win(p):
     elif p == 1:
         table = Table(show_header=True, header_style="bold magenta")
         table.add_column("Attempt No.", justify="center", width=7)
-        table.add_column("Bot choice", width=14)
-        table.add_column("User choice", justify="right", width=14)
+        table.add_column("Bot choice",  justify="center",width=25)
+        table.add_column("User choice",  justify="center", width=25)
         table.add_column("Score", justify="center")
         table.add_row(f"[bold green]{attempt}[/bold green]",
-                      f"[bold green]{choices[computer_choice]}[/bold green]",
-                      f"[bold green]{choices[user_choice]}[/bold green]",
+                      f"[bold green]{choices[computer_choice]}{shape[computer_choice]}[/bold green]",
+                      f"[bold green]{choices[user_choice]}{shape[user_choice]}[/bold green]",
                       f"[bold green]{str(computer_score)}-{str(user_score)}[/bold green]")
         console.print(table)
         console.print(tabulate(my_data, headers=won,
@@ -80,12 +129,12 @@ def display_win(p):
     elif p == 2:
         table = Table(show_header=True, header_style="bold magenta")
         table.add_column("Attempt No.", justify="center", width=7)
-        table.add_column("Bot choice", width=14)
-        table.add_column("User choice", justify="right", width=14)
+        table.add_column("Bot choice", justify="center", width=25)
+        table.add_column("User choice",  justify="center", width=25)
         table.add_column("Score", justify="center")
         table.add_row(f"[bold red]{attempt}[/bold red]",
-                      f"[bold red]{choices[computer_choice]}[/bold red]",
-                      f"[bold red]{choices[user_choice]}[/bold red]",
+                      f"[bold red]{choices[computer_choice]}{shape[computer_choice]}[/bold red]",
+                      f"[bold red]{choices[user_choice]}{shape[user_choice]}[/bold red]",
                       f"[bold red]{str(computer_score)}-{str(user_score)}[/bold red]")
         console.print(table)
         console.print(tabulate(my_data, headers=loss,
@@ -134,7 +183,7 @@ while main_choice != 3:
                                 tablefmt="grid"), style="bold green")
             with open("prize1.txt") as file1:
                 console.print(file1.read(), style="bold yellow")
-            print("Beginners luck,I guess!", style="bold magenta")
+            console.print("Beginners luck,I guess!", style="bold magenta")
         elif computer_score > user_score:
             console.print(tabulate(my_data, headers=["You loss better luck next time!"],
                                 tablefmt="grid"), style="bold yellow")
