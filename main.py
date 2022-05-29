@@ -1,5 +1,6 @@
 # #* Rock, paper,scissors
 #! Remember to create requirements.txt
+import pathlib
 from rich.markdown import Markdown
 from tabulate import tabulate
 from rich.table import Column, Table
@@ -8,55 +9,11 @@ import pyfiglet
 import random
 import emoji
 
-scissor = '''
-    
-@@@@@7 @@@@@@@@@@@G @@@@@
-@@@@@@  @@@@@@@@@Y @@@@@@
-@@@@@@@  &@@@@@@  @@@@@@@
-@@@@@@@@&  @@@#  @@@@@@@@
-@@@@@@@@@@  @   @@@@@@@@@
-@@@@@@@@@@@   @@@@@@@@@@@
-@@@@@@@@@@     @@@@@@@@@@
-@@@@       @@        @@@@
-@@   @@@@  @@   @@@@   @@
-@@  @@@@@@@   @@@@@@@  @@
-@@   @@@@@     @@@@@   @@
-@@@        @@         @@@
-@@@#?J55Y?Y@@@Y?Y55J?#@@@   
-      
-   
-'''
-paper = '''
-
-    .!:^^^^^^^^^:~?.     
-    ~:           .Y~?~   
-    ~:               Y   
-    ~:               ?   
-    ~:               ?   
-    ~:               ?   
-    ~:               ?   
-    ~:               J   
-    ~:               J   
-    ~.               ?   
-    !:               J   
-    .~::::::::^^^^^^^~  
-'''
-rock = '''
+scissor = pathlib.Path("txt/scissor.txt").read_text()
+paper = pathlib.Path("txt/paper.txt").read_text()
+rock = pathlib.Path("txt/rock.txt").read_text()
 
 
-
-
-
-
-
-        .7JJJ.      
-       .PBBG5~      
-      :P#&&#P?.     
-     .G###&&&G:     
-      Y&&&#B5^      
-       !?~.         
-                    
-'''
 console = Console()
 list1 = [1, 2, 3]
 choices = ["Error", "Rock", "Paper", "Scissor"]
@@ -151,26 +108,27 @@ def display_win(p):
 
 
 # * main code block
+# sourcery skip: hoist-statement-from-loop
 console.print("Welcome to \n", style="bold blue")
-with open("intro.txt") as file1:
+with open("txt/intro.txt") as file1:
     console.print(file1.read(), style="bold blue")
 main_choice = 0
 while main_choice != 3:
+    attempt = 1
     computer_score = 0
     user_score = 0
-    attempt = 1
     print("What do you want to do :")
     print("\t1.New Game.\n\t2.Rules\n\t3.Exit")
     main_choice = int(input("→ "))
     if main_choice == 1:
         while attempt <= 3:
-            with open("comic_top.txt") as file1:
+            with open("txt/comic_top.txt") as file1:
                 console.print(file1.read())
             print(" | Enter your choice :   |")
             print(" |\t1.Rock           |\n |\t2.Paper          |\n |\t3.Scissors       |")
             computer_choice = random.choice(list1)
-            with open("comic_bottom.txt") as file1:
-                console.print(file1.read())
+            with open("txt/comic_bottom.txt") as file1:
+                console.print(file1.read(),style="white")
             user_choice = int(input("→ "))
             print("\n\n")
             check_win()
@@ -181,23 +139,23 @@ while main_choice != 3:
         if computer_score < user_score:
             console.print(tabulate(my_data, headers=["Congrats, you won!!"],
                                 tablefmt="grid"), style="bold green")
-            with open("prize1.txt") as file1:
+            with open("txt/prize1.txt") as file1:
                 console.print(file1.read(), style="bold yellow")
             console.print("Beginners luck,I guess!", style="bold magenta")
         elif computer_score > user_score:
             console.print(tabulate(my_data, headers=["You loss better luck next time!"],
                                 tablefmt="grid"), style="bold yellow")
-            with open("prize3.txt") as file1:
+            with open("txt/prize3.txt") as file1:
                 console.print(file1.read(), style="bold green")
             console.print("", style="bold magenta")
         elif computer_score == user_score:
             console.print(tabulate(my_data, headers=["The match was a tie"],
                                 tablefmt="grid"), style="bold blue")
-            with open("prize2.txt") as file1:
+            with open("txt/prize2.txt") as file1:
                 console.print(file1.read(), style="bold yellow")
             console.print("Want to try your luck again!!", style="bold magenta")
     elif main_choice == 2:
-        with open("Rules.md") as readme:
+        with open("txt/Rules.md") as readme:
             markdown = Markdown(readme.read())
         console.print(markdown)
         gb=0
