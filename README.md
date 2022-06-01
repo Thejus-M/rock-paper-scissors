@@ -8,7 +8,9 @@ To play run
 
 Enjoy!!
 
-![image](https://user-images.githubusercontent.com/81758774/171433487-61c8553b-a6ef-4fd6-ac7d-37e43599d45c.png)
+
+![image](https://user-images.githubusercontent.com/81758774/171437777-a7607a69-4b8d-4637-9c65-c025a31d3e24.png)
+
 
 
 ![image](https://user-images.githubusercontent.com/81758774/171433985-54e18cd0-acbd-4eba-92b4-38fe9e2a0408.png)
