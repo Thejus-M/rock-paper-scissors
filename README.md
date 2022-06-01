@@ -1,6 +1,6 @@
 # Rock-Paper-Scissors
 
-To play run
+To play, run
 
 1. `pip install -r requirements.txt`
 
