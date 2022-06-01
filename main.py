@@ -1,5 +1,4 @@
 # #* Rock, paper,scissors
-#! Remember to create requirements.txt
 import pathlib
 from rich.markdown import Markdown
 from tabulate import tabulate
@@ -9,22 +8,26 @@ import pyfiglet
 import random
 import emoji
 
+#ASCII images of Rock, paper,scissors
 scissor = pathlib.Path("txt/scissor.txt").read_text()
 paper = pathlib.Path("txt/paper.txt").read_text()
 rock = pathlib.Path("txt/rock.txt").read_text()
-
-
 console = Console()
-list1 = [1, 2, 3]
+
+list1 = [1, 2, 3] #just to create random number
+
+# just representing choices and shapes in array 
 choices = ["Error", "Rock", "Paper", "Scissor"]
 shape = ["Error",rock,paper,scissor]
 my_data = []
 
+# Just a template for wining,losing and tie
 won = ["You won this round"]
 loss = ["You loss this round"]
 tie = ["This round was a tie"]
 
-
+# todo: Create a new column for game no.
+# This is the main score board at the end of the game
 main_table = Table(show_header=True, header_style="bold magenta")
 main_table.add_column("Attempt No.", justify="center", width=7)
 main_table.add_column("Bot choice", width=14)
@@ -34,7 +37,7 @@ main_table.add_column("Score", justify="center")
 
 
 
-
+# function to check if the user won,lose or met tie
 def check_win():
     global computer_score, user_score
     if (choices[computer_choice] == choices[user_choice]):
@@ -47,6 +50,7 @@ def check_win():
         display_win(2)
 
 
+# function for displaying the table at the end of each round
 def display_win(p):
     global main_table
     if p == 0:
@@ -107,12 +111,15 @@ def display_win(p):
     print("\n\n")
 
 
-# * main code block
-# sourcery skip: hoist-statement-from-loop
+# * main code block place where the logic is written
+
+# Intro screen 
 console.print("Welcome to \n", style="bold blue")
 with open("txt/intro.txt") as file1:
     console.print(file1.read(), style="bold blue")
+
 main_choice = 0
+# just for running till player press exit
 while main_choice != 3:
     attempt = 1
     computer_score = 0
@@ -120,8 +127,11 @@ while main_choice != 3:
     print("What do you want to do :")
     print("\t1.New Game.\n\t2.Rules\n\t3.Exit")
     main_choice = int(input("→ "))
+    # game logic
     if main_choice == 1:
+        # for playing a match only 3 time
         while attempt <= 3:
+            # Design for the choice menu
             with open("txt/comic_top.txt") as file1:
                 console.print(file1.read())
             print(" | Enter your choice :   |")
@@ -134,6 +144,7 @@ while main_choice != 3:
             check_win()
             attempt += 1
             print("========================================================")
+        # the game ends here and main table is print 
         console.print(main_table)
         console.print("")
         if computer_score < user_score:
@@ -154,6 +165,7 @@ while main_choice != 3:
             with open("txt/prize2.txt") as file1:
                 console.print(file1.read(), style="bold yellow")
             console.print("Want to try your luck again!!", style="bold magenta")
+    # For showing rules and showing options in it
     elif main_choice == 2:
         with open("txt/Rules.md") as readme:
             markdown = Markdown(readme.read())
